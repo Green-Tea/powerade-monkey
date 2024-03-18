@@ -36,7 +36,7 @@ async def on_message(message: Message) -> None:
     user_message: str = message.content
     channel: str = message.channel.name
 
-    if username == '_seaweed' and channel == 'general':
+    if username == '_seaweed' and (channel == 'general' or channel == 'cunt-convos'):
         await send_message(message, user_message)
 
     return
