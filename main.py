@@ -31,17 +31,15 @@ async def on_ready() -> None:
 async def on_message(message: Message) -> None:
     if message.author == client.user:
         return
-    
+
     username: str = message.author.name
     user_message: str = message.content
     channel: str = message.channel.name
-    
-    if username != '_seaweed':
-        return
-    
-    print(f'{username} said {user_message} in {channel}')
 
-    await send_message(message, user_message)
+    if username == '_seaweed' and channel == 'general':
+        await send_message(message, user_message)
+
+    return
 
 def main() -> None:
     client.run(token=TOKEN)
