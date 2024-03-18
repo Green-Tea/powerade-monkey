@@ -20,12 +20,6 @@ async def send_message(message: Message, user_message: str) -> None:
     if not user_message:
         logger.warning('Message was empty because intents were not enabled properly')
         return
-    
-    if user_message.startswith('?'):
-        user_message = user_message[1:]
-        is_private = True
-    else:
-        is_private = False
 
     try:
         response: str = get_response(user_message)
