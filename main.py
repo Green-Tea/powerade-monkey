@@ -3,13 +3,13 @@ import os
 from dotenv import load_dotenv
 from discord import Intents, Client, Message
 from responses import get_response
+from datetime import datetime, timedelta, timezone
 
 load_dotenv()
 TOKEN: Final[str] = os.getenv('DISCORD_TOKEN')
 
-
 intents: Intents = Intents.default()
-intents.message_content = True # NOQA
+intents.message_content = True
 client: Client = Client(intents=intents)
 
 async def send_message(message: Message, user_message: str) -> None:
@@ -37,6 +37,10 @@ async def on_message(message: Message) -> None:
     channel: str = message.channel.name
 
     if username == '_seaweed' and (channel == 'general' or channel == 'cunt-convos'):
+        now_utc: datetime = datetime.now(timezone.utc)
+        utc_plus_7: timedelta = now_utc + timedelta(hours=7)
+        timestamp: str = utc_plus_7.strftime('%Y-%m-%d %H:%M:%S')
+        print(f'Time of awakening: {timestamp}')
         await send_message(message, user_message)
 
     return
